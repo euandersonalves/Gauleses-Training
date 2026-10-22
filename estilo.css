@@ -1,0 +1,1229 @@
+/* =========================================================
+   BRASA ACADEMIA - ARQUIVO DE ESTILOS (CSS)
+
+   ORGANIZAÇÃO (na mesma ordem do index.html):
+     0. Cores e configurações gerais
+     1. Peças reutilizáveis (botão, títulos de seção)
+     2. Topo
+     3. Programas
+     4. Calculadora de saúde
+     5. Planos
+     6. Professores
+     7. Espaço
+     8. Avaliações dos alunos
+     9. Rodapé
+     9.5 Imagens (cartões, professores e alunos)
+    10. Versão para computador (telas a partir de 900px)
+    11. Acessibilidade (movimento reduzido)
+
+   O site foi feito PRIMEIRO para celular. Tudo o que está
+   antes da seção 10 vale para o celular. A seção 10 só muda
+   o que precisa ser diferente no computador.
+   ========================================================= */
+
+
+/* =========================================================
+   0. CORES E CONFIGURAÇÕES GERAIS
+   Para trocar uma cor do site inteiro, mude aqui.
+   ========================================================= */
+:root {
+  --vermelho: #d93a3a;
+  --vermelho-escuro: #b92d2d;
+  --preto: #0d0d0d;
+  --fundo: #ffffff;
+  --cinza-claro: #eeeeee;
+  --texto: #1a1a1a;
+  --texto-suave: #666666;
+  --fora-da-coluna: #d8d8d8; /* cor que aparece nas laterais no computador */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* rolagem suave ao clicar nos links do menu */
+  background: var(--fora-da-coluna);
+  padding-top: env(safe-area-inset-top, 0px);
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* No celular o site é uma coluna de até 430px, centralizada */
+body {
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 400 15px/1.5 Inter, system-ui, sans-serif;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  overflow-x: hidden;
+}
+
+/* Títulos usam a fonte Bebas Neue */
+h1, h2, h3, .logo {
+  font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+}
+
+.botoesnav{
+   border-radius: 20px;
+   transition: 0.4s;
+}
+
+.botoesnav:hover{
+  background-color: white;
+  color:black;
+ 
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Contorno vermelho ao navegar com o teclado */
+:focus-visible {
+  outline: 3px solid var(--vermelho);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   1. PEÇAS REUTILIZÁVEIS
+   ========================================================= */
+
+/* Caixa que dá margem nas laterais do conteúdo */
+.conteudo {
+  padding: 0 18px;
+}
+
+/* Botão vermelho (usado em várias seções) */
+.botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  background: var(--vermelho);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.4s;
+}
+
+.botao:hover{
+  background-color: white;
+  color: black;
+}
+.botao:active {
+  background: var(--vermelho-escuro);
+}
+.botao-branco {
+  background: #fff;
+  color: var(--preto);
+}
+.botao-pequeno {
+  width: auto;
+  margin: 18px 18px 0;
+}
+
+/* Seção escura (fundo preto e texto claro) */
+.fundo-escuro {
+  background: var(--preto);
+  color: #f2f2f2;
+}
+
+/* Espaçamento padrão de cima e de baixo de cada seção */
+.secao {
+  padding: 48px 0;
+}
+
+/* Cabeçalho das seções: textinho vermelho + título + subtítulo */
+.cabecalho-secao {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.cabecalho-secao small {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--vermelho);
+  font-size: 13px;
+  font-weight: 600;
+}
+.cabecalho-secao h2 {
+  font-size: 42px;
+}
+.cabecalho-secao p {
+  margin-top: 10px;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   2. TOPO
+   A foto do topo é uma tag <img class="topo-foto"> no HTML.
+   Para trocar a foto, veja o guia no começo do index.html.
+   Aqui no CSS ficam só o tamanho, a posição e as sombras.
+   ========================================================= */
+.topo {
+  position: relative;
+  overflow: hidden;
+  min-height: 100px;
+  padding-bottom: 28px;
+  background-color: var(--preto);
+}
+
+/* A foto fica atrás de tudo e preenche o topo.
+   No celular ela é cortada pela esquerda (object-position). */
+.topo-foto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 400px;
+  height: 100%;
+  object-fit:inherit;
+  object-position: 10% 100%;
+  
+}
+
+/* Sombras por cima da foto, de cima para baixo:
+   1) sombra no topo (para o menu aparecer)
+   2) sombra na esquerda (para o texto ler bem)
+   3) brilho vermelho */
+.topo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(13, 13, 13, 0.7) 0, rgba(13, 13, 13, 0) 90px),
+    linear-gradient(90deg, rgba(13, 13, 13, 0.95) 0, rgba(13, 13, 13, 0.85) 40%, rgba(13, 13, 13, 0) 68%),
+    radial-gradient(circle at 75% 85%, rgba(217, 58, 58, 0.3), transparent 60%);
+}
+
+/* Barra de cima: logo à esquerda e menu à direita */
+.topo-barra {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+}
+
+.logo {
+  font-size: 30px;
+}
+.logo b {
+  color: var(--vermelho); /* o "S" da logo é vermelho */
+  font-weight: 400;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #cccccc;
+  font-size: 13px;
+}
+.menu a {
+  display: flex;
+  align-items: center;
+  min-height: 44px; /* tamanho bom para tocar com o dedo */
+  padding: 10px 8px;
+}
+
+/* Título, texto e botão (ficam numa coluna à esquerda no celular) */
+.topo-conteudo {
+  position: relative;
+  z-index: 2;
+  max-width: min(62%, 260px);
+  padding: 4px 18px 18px;
+}
+.topo h1 {
+  margin-bottom: 10px;
+  font-size: clamp(32px, 10.5vw, 44px);
+}
+.topo p {
+  margin-bottom: 14px;
+  color: #c9c9c9;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.topo .botao {
+  display: inline-flex;
+  width: auto;
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   3. PROGRAMAS
+   ========================================================= */
+#programas {
+  padding-bottom: 8px; /* menos espaço entre programas e calculadora */
+}
+
+.grade-programas {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 cartões por linha no celular */
+  gap: 10px;
+}
+
+.cartao {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 150px;
+  padding: 16px;
+  border-radius: 16px;
+  transition: transform 0.25s, filter 0.25s, opacity 0.25s;
+}
+.cartao h3 {
+  margin-bottom: 4px;
+  font-size: 28px;
+}
+.cartao p {
+  font-size: 13px;
+  line-height: 1.35;
+  opacity: 0.8;
+}
+
+/* Cor de cada cartão = cor que aparece se a foto não carregar */
+.cartao-musculacao { background: var(--preto); }
+.cartao-hiit       { background: var(--vermelho); }
+.cartao-funcional  { background: #4a4a4a; }
+.cartao-boxe       { background: #2a2a2a; }
+.cartao-mobilidade {
+  grid-column: span 2; /* ocupa a linha inteira */
+  min-height: 110px;
+  background: #222222;
+  border: 2px solid var(--vermelho);
+}
+
+/* Quando o mouse está em cima de UM cartão, os outros ficam desfocados.
+   Só funciona com mouse, e não desfoca se o mouse estiver entre os cartões. */
+@media (hover: hover) {
+  .grade-programas:has(.cartao:hover) .cartao:not(:hover) {
+    filter: blur(2px) brightness(0.8);
+  }
+}
+.grade-programas:has(.cartao:focus-visible) .cartao:not(:focus-visible) {
+  filter: blur(2px) brightness(0.8);
+}
+
+.ver-todos {
+  display: block;
+  margin-top: 8px;
+  padding: 10px;
+  text-align: center;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   4. CALCULADORA DE SAÚDE
+   ========================================================= */
+#calculadora {
+  padding-top: 24px;
+}
+
+.calculadora {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  border: 2px solid var(--texto);
+  border-radius: 20px;
+}
+
+.calculadora fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+.calculadora legend,
+.campo label {
+  display: block;
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* --- Pergunta 1: botões de gênero --- */
+.genero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.genero legend {
+  grid-column: span 2;
+}
+.genero label {
+  position: relative;
+  cursor: pointer;
+}
+/* O círculo do rádio fica escondido; o que aparece é o <span> */
+.genero input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.genero span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: var(--cinza-claro);
+  font-size: 17px;
+  font-weight: 600;
+}
+.genero input:checked + span {
+  background: var(--preto);
+  color: #fff;
+  border-color: var(--vermelho);
+}
+.genero input:checked + span::before {
+  content: "\2713\00a0"; /* o ✓ antes do texto */
+}
+.genero input:focus-visible + span {
+  outline: 3px solid var(--vermelho);
+  outline-offset: 2px;
+}
+
+/* --- Perguntas 2, 3 e 4: idade, altura e peso --- */
+.campos {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.campo {
+  min-width: 0;
+}
+.entrada {
+  position: relative;
+}
+.entrada input {
+  width: 100%;
+  min-width: 0;
+  min-height: 56px;
+  margin: 0;
+  padding: 0 50px 0 14px; /* espaço à direita para a unidade (anos, cm, kg) */
+  border: 2px solid var(--texto);
+  border-radius: 14px;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 600 20px Inter, system-ui, sans-serif;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.entrada input:focus {
+  outline: 3px solid var(--vermelho);
+  outline-offset: 2px;
+}
+/* O JavaScript coloca aria-invalid="true" quando o valor está errado */
+.entrada input[aria-invalid="true"] {
+  border-color: var(--vermelho);
+}
+.unidade {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--texto-suave);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.erro {
+  margin-bottom: 12px;
+  color: #b91c1c;
+  font-size: 15px;
+  font-weight: 600;
+}
+.erro:empty {
+  display: none; /* some quando não tem mensagem */
+}
+
+/* --- Resultado --- */
+.resultado {
+  margin-top: 22px;
+  outline: none;
+}
+.resultado[hidden] {
+  display: none;
+}
+
+/* Faixa grande com a classificação (a cor é colocada pelo JavaScript) */
+.veredito {
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--preto);
+  color: #fff;
+  text-align: center;
+}
+.veredito-rotulo {
+  display: block;
+  font-size: 14px;
+  opacity: 0.9;
+}
+.veredito-classificacao {
+  display: block;
+  margin: 6px 0;
+  font: 400 52px/1 'Bebas Neue', Impact, sans-serif;
+  letter-spacing: 0.02em;
+}
+.veredito-imc {
+  font-size: 18px;
+}
+
+/* Barra de escala do IMC com a setinha */
+.escala-caixa {
+  position: relative;
+  margin: 18px 0 6px;
+  padding-top: 20px;
+}
+.escala-marcador {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--texto);
+}
+.escala {
+  display: flex;
+  height: 14px;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.escala i {
+  display: block;
+}
+.escala-nomes {
+  display: flex;
+  margin-top: 6px;
+  color: var(--texto-suave);
+  font-size: 11px;
+  font-weight: 600;
+}
+.escala-nomes span {
+  white-space: nowrap;
+}
+/* Largura e cor de cada faixa (os números 14, 26, 20 e 40 são proporções) */
+.faixa-abaixo     { flex: 14; }
+.faixa-normal     { flex: 26; }
+.faixa-sobrepeso  { flex: 20; }
+.faixa-obesidade  { flex: 40; }
+.escala .faixa-abaixo    { background: #8a5a00; }
+.escala .faixa-normal    { background: #1f7a3d; }
+.escala .faixa-sobrepeso { background: #c2410c; }
+.escala .faixa-obesidade { background: #b91c1c; }
+
+/* Cartinhas com os números extras */
+.medidas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 16px;
+}
+.medida {
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--cinza-claro);
+}
+.medida-larga {
+  grid-column: span 2;
+}
+.medida span {
+  display: block;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+.medida strong {
+  display: block;
+  margin-top: 2px;
+  font: 400 34px/1.1 'Bebas Neue', Impact, sans-serif;
+}
+.medida small {
+  color: var(--texto-suave);
+  font-size: 13px;
+}
+
+.dica {
+  margin: 16px 0;
+  font-size: 16px;
+}
+.aviso-pequeno {
+  margin-top: 12px;
+  color: var(--texto-suave);
+  font-size: 12px;
+  text-align: center;
+}
+
+/* No celular um pouco maior (600px), os 3 campos ficam lado a lado */
+@media (min-width: 600px) {
+  .campos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* =========================================================
+   5. PLANOS
+   ========================================================= */
+.planos {
+  background: var(--cinza-claro);
+}
+
+.plano {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  min-height: 72px;
+  margin-bottom: 8px;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--fundo);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.plano h3 {
+  font-size: 28px;
+}
+.plano-descricao {
+  display: block;
+  margin-top: 3px;
+  color: var(--texto-suave);
+  font-size: 13px;
+  line-height: 1.3;
+}
+.plano-direita {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.plano-preco {
+  font: 400 30px 'Bebas Neue', Impact, sans-serif;
+  white-space: nowrap;
+}
+.plano-preco small {
+  font: 400 12px Inter, sans-serif;
+  opacity: 0.7;
+}
+.plano-seta {
+  color: var(--vermelho);
+  font: 400 28px 'Bebas Neue', Impact, sans-serif;
+}
+
+/* Plano em destaque (preto) e efeito ao passar o mouse */
+.plano-destaque,
+.plano:hover {
+  background: var(--preto);
+  color: #fff;
+}
+.plano-destaque .plano-descricao,
+.plano:hover .plano-descricao {
+  color: #aaaaaa;
+}
+.plano:active {
+  transform: scale(0.98);
+}
+
+.nota-planos {
+  margin-top: 12px;
+  color: var(--texto-suave);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   6. PROFESSORES
+   ========================================================= */
+.equipe {
+  position: relative; /* o balão se posiciona em relação a esta caixa */
+}
+
+/* 4 professores lado a lado, em uma linha */
+.lista-professores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 0 18px;
+}
+
+.professor {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.professor:focus-visible {
+  outline: none;
+}
+
+/* Foto redonda (por enquanto é a letra inicial) */
+.foto-professor {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #3a0d0d, var(--preto));
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.professor:nth-child(2) .foto-professor {
+  background: linear-gradient(160deg, var(--vermelho), #4a0f0f);
+}
+.professor:nth-child(3) .foto-professor {
+  background: linear-gradient(160deg, #444444, var(--preto));
+}
+
+.dados-professor {
+  padding-top: 8px;
+}
+.dados-professor strong {
+  display: block;
+  font-size: 12px;
+}
+.dados-professor span {
+  display: block;
+  color: var(--texto-suave);
+  font-size: 11px;
+}
+
+/* Efeito ao passar o mouse, focar ou quando o balão está aberto (.aberto) */
+.professor:hover .foto-professor,
+.professor.aberto .foto-professor,
+.professor:focus-visible .foto-professor {
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 0 0 3px var(--vermelho), 0 10px 22px rgba(217, 58, 58, 0.35);
+}
+.professor:hover strong,
+.professor.aberto strong {
+  color: var(--vermelho);
+}
+
+/* Balão preto com as informações. O JavaScript preenche e mostra. */
+.balao-professor {
+  position: absolute;
+  top: 100%;
+  left: 18px;
+  right: 18px;
+  z-index: 5;
+  padding: 24px 18px 16px;
+  border-radius: 16px;
+  background: var(--preto);
+  color: #fff;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+  animation: balao-aparecendo 0.2s ease;
+}
+.balao-professor[hidden] {
+  display: none;
+}
+/* A setinha do balão (o JavaScript muda a posição em --seta-x) */
+.balao-professor::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: var(--seta-x, 50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--preto);
+  transform: translateX(-50%) rotate(45deg);
+}
+.balao-professor h3 {
+  position: relative;
+  margin-bottom: 2px;
+  font-size: 32px;
+}
+.balao-professor b {
+  display: block;
+  margin-bottom: 8px;
+  color: #ff7b7b;
+  font-size: 13px;
+}
+.balao-professor p {
+  color: #dddddd;
+  font-size: 14px;
+}
+.balao-professor small {
+  display: block;
+  margin-top: 8px;
+  color: #999999;
+  font-size: 12px;
+}
+
+@keyframes balao-aparecendo {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+
+/* =========================================================
+   7. ESPAÇO
+   ========================================================= */
+.espaco h2 {
+  margin-bottom: 22px;
+  font-size: 42px;
+}
+
+/* Mosaico: 2 colunas no celular. O primeiro ambiente é maior. */
+.mosaico {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 120px;
+  gap: 8px;
+}
+
+.ambiente {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2e2e2e, #111111);
+  color: #cccccc;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.ambiente:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: linear-gradient(135deg, #7a1616, #140505);
+}
+.ambiente:hover,
+.ambiente:focus-visible {
+  z-index: 2;
+  transform: scale(1.03);
+  box-shadow: 0 0 0 2px var(--vermelho);
+}
+/* Bolinha vermelha com "+" que avisa que dá para clicar */
+.ambiente::after {
+  content: "+";
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--vermelho);
+  color: #fff;
+  font-weight: 600;
+}
+.ambiente.aberto::after {
+  display: none;
+}
+
+/* Texto que aparece por cima do ambiente quando ele está aberto */
+.info-ambiente {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 12px;
+  border: 2px solid var(--vermelho);
+  border-radius: 12px;
+  background: rgba(13, 13, 13, 0.95);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.35;
+  animation: balao-aparecendo 0.2s ease;
+}
+.info-ambiente[hidden] {
+  display: none;
+}
+.info-ambiente strong {
+  margin-bottom: 4px;
+  color: #ff7b7b;
+  font: 400 22px/1 'Bebas Neue', Impact, sans-serif;
+}
+.ambiente:first-child .info-ambiente {
+  padding: 18px;
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   8. AVALIAÇÕES DOS ALUNOS
+   ========================================================= */
+.carrossel {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.cartao-avaliacao {
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+  padding: 18px 18px 22px;
+  border-radius: 16px;
+  background: var(--cinza-claro);
+  transition: opacity 0.2s;
+}
+/* Classe colocada pelo JavaScript na hora da troca (some e volta) */
+.cartao-avaliacao.trocando {
+  opacity: 0;
+}
+.estrelas {
+  color: var(--vermelho);
+  letter-spacing: 2px;
+}
+.cartao-avaliacao p {
+  margin: 8px 0 12px;
+  font-size: 16px;
+}
+.autor-avaliacao {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Barrinha de tempo: enche em 6 segundos e troca a avaliação */
+.barra-tempo {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+}
+.barra-tempo i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--vermelho);
+}
+.barra-tempo i.rodando {
+  animation: encher-barra 6s linear forwards;
+}
+/* Quando o mouse está em cima, a barra pausa */
+.carrossel.pausado .barra-tempo i {
+  animation-play-state: paused;
+}
+@keyframes encher-barra {
+  to {
+    width: 100%;
+  }
+}
+
+/* Fotos redondas dos alunos */
+.abas-alunos {
+  display: flex;
+  gap: 6px;
+  margin-top: 16px;
+}
+.aluno {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+}
+.aluno:hover,
+.aluno[aria-selected="true"] {
+  opacity: 1;
+}
+.aluno:focus-visible {
+  outline: 3px solid var(--vermelho);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+.foto-aluno {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #444444, var(--preto));
+  overflow: hidden;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.aluno:nth-child(2n) .foto-aluno {
+  background: linear-gradient(160deg, var(--vermelho), #4a0f0f);
+}
+/* Aluno escolhido: anel vermelho e um pouco maior */
+.aluno[aria-selected="true"] .foto-aluno {
+  border-color: var(--vermelho);
+  transform: scale(1.12);
+  box-shadow: 0 6px 16px rgba(217, 58, 58, 0.35);
+}
+.aluno-nome {
+  font-size: 12px;
+}
+.aluno-idade {
+  color: var(--texto-suave);
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   9. RODAPÉ
+   ========================================================= */
+.rodape {
+  padding: 44px 0 30px;
+  text-align: center;
+}
+.rodape h2 {
+  margin: 14px 0 20px;
+  font-size: 48px;
+}
+.rodape .botao {
+  margin: 0 auto;
+}
+
+/* Endereço, horário e contato: lado a lado se couber,
+   senão um embaixo do outro (centralizados) */
+.info-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px 48px;
+  margin-top: 32px;
+}
+.info-rodape h4 {
+  margin: 0 0 4px;
+  color: #888888;
+  font-size: 13px;
+  font-weight: 500;
+}
+.info-rodape p {
+  margin: 0;
+}
+
+.direitos {
+  margin-top: 30px;
+  color: #777777;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   IMAGENS (cartões de programas, ambientes, professores e alunos)
+
+   As imagens são tags <img> no HTML. Aqui no CSS ficam só
+   o tamanho e o corte delas. Para trocar uma imagem,
+   veja o guia no começo do index.html.
+   ========================================================= */
+
+/* Foto que preenche o cartão inteiro, atrás do texto */
+.foto-fundo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* corta a foto para preencher sem esticar */
+}
+
+/* Sombra escura por cima da foto, para o texto aparecer bem */
+.cartao::before,
+.ambiente::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(0deg, rgba(13, 13, 13, 0.8) 0, rgba(13, 13, 13, 0.1) 70%);
+}
+
+/* O texto fica por cima da foto e da sombra */
+.cartao h3,
+.cartao p,
+.ambiente > span {
+  position: relative;
+  z-index: 2;
+}
+
+/* Fotos redondas de professores e alunos (o círculo vem do pai) */
+.foto-professor img,
+.foto-aluno img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   10. VERSÃO PARA COMPUTADOR (telas de 900px ou mais)
+   Aqui só aparece o que MUDA em relação ao celular.
+   ========================================================= */
+
+@media (min-width: 401px){
+  .topo-foto{
+    min-width: 500px;
+  }
+}   
+@media (min-width: 900px) {
+
+  :root {
+    /* margem lateral que centraliza o topo e o rodapé em 1100px */
+    --margem-lateral: max(32px, calc((100% - 1100px) / 2));
+  }
+
+  /* No computador o site ocupa a tela toda */
+  html { background: var(--fundo); }
+  body { max-width: none; font-size: 16px; }
+
+  .conteudo {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .secao { padding: 96px 0; }
+  .cabecalho-secao { margin-bottom: 44px; }
+  .cabecalho-secao h2,
+  .espaco h2 { font-size: 64px; }
+  .cabecalho-secao p { font-size: 16px; }
+  .botao-pequeno { width: 300px; margin: 36px auto 0; }
+
+  /* --- Topo: texto à esquerda e foto grande à direita --- */
+  .topo {
+    min-height: 720px;
+    padding-bottom: 0;
+  }
+  /* No computador a foto vai para a direita, com a altura toda */
+  .topo-foto {
+    left: auto;
+    right: 0;
+    width: auto;
+    object-fit: initial;
+  }
+  .topo::before {
+    background:
+      linear-gradient(90deg, var(--preto) 0, rgba(13, 13, 13, 0.88) 32%, rgba(13, 13, 13, 0) 62%),
+      radial-gradient(circle at 75% 85%, rgba(217, 58, 58, 0.25), transparent 55%);
+  }
+  .topo-barra { padding: 24px var(--margem-lateral); }
+  .logo { font-size: 38px; }
+  .menu { gap: 18px; font-size: 15px; }
+  .topo-conteudo {
+    max-width: none;
+    padding: 40px var(--margem-lateral) 100px;
+  }
+  .topo h1 {
+    max-width: 9ch;
+    margin-bottom: 22px;
+    font-size: 128px;
+  }
+  .topo p {
+    max-width: 42ch;
+    margin-bottom: 24px;
+    font-size: 18px;
+  }
+  .topo .botao {
+    min-height: 52px;
+    padding: 0 40px;
+    font-size: 16px;
+  }
+
+  /* --- Programas: 6 colunas --- */
+  #programas { padding-bottom: 8px; }
+  #calculadora { padding-top: 24px; }
+  .grade-programas {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+  .cartao {
+    grid-column: span 2;
+    min-height: 230px;
+    padding: 24px;
+  }
+  .cartao-musculacao,
+  .cartao-hiit { grid-column: span 3; }
+  .cartao-mobilidade { min-height: 230px; }
+  .cartao:hover { transform: translateY(-4px); }
+  .cartao h3 { font-size: 36px; }
+  .cartao p { font-size: 15px; }
+
+  /* --- Planos --- */
+  .planos .conteudo { max-width: 820px; }
+  .plano { padding: 22px 26px; }
+  .plano h3 { font-size: 34px; }
+  .plano-preco { font-size: 38px; }
+
+  /* --- Professores --- */
+  .equipe { max-width: 760px; margin: 0 auto; }
+  .lista-professores { padding: 0 32px; gap: 32px; }
+  .dados-professor strong { font-size: 17px; }
+  .dados-professor span { font-size: 14px; }
+  .balao-professor { left: 32px; right: 32px; }
+
+  /* --- Espaço: 4 colunas --- */
+  .mosaico {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 190px;
+    gap: 12px;
+  }
+  .ambiente { padding: 16px; font-size: 15px; }
+  .ambiente:not(:first-child) .info-ambiente { font-size: 13px; }
+
+  /* --- Avaliações --- */
+  .foto-aluno { width: 70px; height: 70px; }
+  .aluno-nome { font-size: 14px; }
+  .aluno-idade { font-size: 12px; }
+
+  /* --- Rodapé --- */
+  .rodape { padding: 80px 0 40px; }
+  .rodape h2 { font-size: 72px; }
+  .rodape .botao { width: 320px; }
+}
+
+
+/* =========================================================
+   11. ACESSIBILIDADE
+   Para quem pediu "reduzir movimento" no aparelho,
+   desligamos as animações e a rolagem suave.
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .professor .foto-professor,
+  .ambiente,
+  .cartao,
+  .balao-professor,
+  .info-ambiente,
+  .foto-aluno {
+    transition: none !important;
+    animation: none !important;
+  }
+}

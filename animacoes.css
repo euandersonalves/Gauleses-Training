@@ -1,0 +1,230 @@
+/* =========================================================
+   ANIMAÇÕES (CSS)
+
+   Este arquivo é um EXTRA. Ele não mexe no estilo.css.
+   Para desligar todas as animações, é só apagar (ou comentar)
+   a linha <link> deste arquivo no index.html.
+
+   ORGANIZAÇÃO:
+     1. Aparecer e sumir ao rolar a página
+     2. Topo: entrada do texto, zoom lento na foto, brilho e brasas
+     3. Pequenos efeitos (botões, setas, logo)
+     4. Acessibilidade (movimento reduzido)
+
+   O arquivo js/animacoes.js é quem coloca as classes
+   "visivel", "saiu-cima" e "saiu-baixo" nos elementos.
+   ========================================================= */
+
+
+/* =========================================================
+   1. APARECER E SUMIR AO ROLAR A PÁGINA
+   Todo elemento com data-animar="..." anima quando entra na
+   tela e quando sai dela. Os efeitos disponíveis são:
+     subir | esquerda | direita | zoom
+   O JavaScript já coloca o data-animar nos elementos da lista
+   do topo do animacoes.js. Também dá para colocar à mão no HTML:
+     <div data-animar="zoom"> ... </div>
+   ========================================================= */
+
+/* Antes de aparecer, o elemento fica invisível.
+   (Só vale se o JavaScript carregou: ele coloca a classe
+   "animacoes-ativas" no <html>. Assim, se o JS falhar,
+   nada some do site.) */
+html.animacoes-ativas [data-animar]:not(.visivel) {
+  opacity: 0;
+}
+
+/* Quando entra na tela: roda a animação de entrada.
+   O atraso (--atraso) é calculado pelo JS para os itens
+   aparecerem um depois do outro. */
+html.animacoes-ativas [data-animar].visivel {
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+  animation-delay: var(--atraso, 0s);
+  animation-fill-mode: backwards;
+}
+[data-animar="subir"].visivel    { animation-name: entrar-subir; }
+[data-animar="esquerda"].visivel { animation-name: entrar-esquerda; }
+[data-animar="direita"].visivel  { animation-name: entrar-direita; }
+[data-animar="zoom"].visivel     { animation-name: entrar-zoom; }
+
+/* Quando sai da tela: roda a animação de saída.
+   "saiu-cima" = saiu pela parte de cima (rolando para baixo)
+   "saiu-baixo" = saiu pela parte de baixo (rolando para cima) */
+html.animacoes-ativas [data-animar].saiu-cima {
+  animation: sair-cima 0.45s ease both;
+}
+html.animacoes-ativas [data-animar].saiu-baixo {
+  animation: sair-baixo 0.45s ease both;
+}
+
+/* --- Os movimentos (keyframes) ---
+   Usamos "translate" e "scale" (e não "transform") para não
+   atrapalhar os efeitos de hover que já existem no estilo.css. */
+@keyframes entrar-subir {
+  from { opacity: 0; translate: 0 36px; }
+}
+@keyframes entrar-esquerda {
+  from { opacity: 0; translate: -48px 0; }
+}
+@keyframes entrar-direita {
+  from { opacity: 0; translate: 48px 0; }
+}
+@keyframes entrar-zoom {
+  from { opacity: 0; scale: 0.88; }
+}
+@keyframes entrar-descer {
+  from { opacity: 0; translate: 0 -20px; }
+}
+@keyframes sair-cima {
+  to { opacity: 0; translate: 0 -28px; }
+}
+@keyframes sair-baixo {
+  to { opacity: 0; translate: 0 28px; }
+}
+
+
+/* =========================================================
+   2. TOPO (a primeira tela do site)
+   ========================================================= */
+
+/* Entrada do topo quando a página abre: um item depois do outro */
+.topo-barra {
+  animation: entrar-descer 0.8s ease backwards;
+}
+.topo h1 {
+  animation: entrar-subir 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s backwards;
+}
+.topo p {
+  animation: entrar-subir 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s backwards;
+}
+/* O botão entra e depois fica "pulsando" um anelzinho vermelho */
+.topo .botao {
+  animation:
+    entrar-subir 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.55s backwards,
+    pulsar-botao 2.6s ease-out 1.8s infinite;
+}
+@keyframes pulsar-botao {
+  0%   { box-shadow: 0 0 0 0 rgba(217, 58, 58, 0.55); }
+  70%, 100% { box-shadow: 0 0 0 14px rgba(217, 58, 58, 0); }
+}
+
+/* Foto do topo: zoom bem lento, indo e voltando.
+   O --paralaxe é atualizado pelo JS: a foto desce um pouquinho
+   enquanto você rola, dando sensação de profundidade. */
+.topo-foto {
+  transform-origin: 70% 100%;
+  translate: 0 var(--paralaxe, 0px);
+  animation: zoom-lento 18s ease-in-out infinite alternate;
+}
+@keyframes zoom-lento {
+  from { scale: 1.06; }
+  to   { scale: 1.12; }
+}
+
+/* Brilho vermelho pulsando atrás da modelo (parece brasa acesa) */
+.topo::after {
+  content: "";
+  position: absolute;
+  right: -20%;
+  bottom: -20%;
+  z-index: 1;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 58, 58, 0.35), transparent 65%);
+  pointer-events: none;
+  animation: pulsar-brilho 5s ease-in-out infinite;
+}
+@keyframes pulsar-brilho {
+  0%, 100% { opacity: 0.5; scale: 1; }
+  50%      { opacity: 1;   scale: 1.15; }
+}
+
+/* Brasas subindo (as bolinhas são criadas pelo animacoes.js) */
+.brasas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.brasa {
+  position: absolute;
+  bottom: -12px;
+  left: var(--x);
+  width: var(--tamanho);
+  height: var(--tamanho);
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffb4a0 0, #ff4d3d 45%, rgba(217, 58, 58, 0) 70%);
+  opacity: 0;
+  animation: subir-brasa var(--duracao) linear var(--atraso) infinite;
+}
+@keyframes subir-brasa {
+  0%   { opacity: 0;   translate: 0 0; }
+  10%  { opacity: 0.9; }
+  100% { opacity: 0;   translate: var(--deriva) calc(-1 * var(--altura-topo, 480px)); }
+}
+
+
+/* =========================================================
+   3. PEQUENOS EFEITOS
+   ========================================================= */
+
+/* Botões sobem um pouquinho e ganham brilho ao passar o mouse */
+.botao {
+  transition: translate 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.botao:hover {
+  translate: 0 -2px;
+  box-shadow: 0 8px 20px rgba(217, 58, 58, 0.35);
+}
+
+/* Seta dos planos anda para a direita */
+.plano-seta {
+  display: inline-block;
+  transition: translate 0.2s;
+}
+.plano:hover .plano-seta {
+  translate: 6px 0;
+}
+
+/* Título do cartão de programa sobe um pouquinho */
+.cartao h3 {
+  transition: translate 0.25s;
+}
+.cartao:hover h3 {
+  translate: 0 -3px;
+}
+
+/* O "S" da logo brilha como uma chama acendendo e apagando */
+.logo b {
+  animation: chama 3s ease-in-out infinite;
+}
+@keyframes chama {
+  0%, 100% { text-shadow: 0 0 0 rgba(217, 58, 58, 0); }
+  50%      { text-shadow: 0 0 14px rgba(217, 58, 58, 0.9); }
+}
+
+
+/* =========================================================
+   4. ACESSIBILIDADE
+   Quem pediu "reduzir movimento" no aparelho não vê nada
+   disso: tudo fica parado e sempre visível.
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .topo-barra,
+  .topo h1,
+  .topo p,
+  .topo .botao,
+  .topo-foto,
+  .topo::after,
+  .brasas,
+  .logo b {
+    animation: none !important;
+  }
+  [data-animar] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}

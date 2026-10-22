@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<!--
+  ============================================================
+  SITE DA BRASA ACADEMIA - ARQUIVO HTML
+  ============================================================
+  Arquivos do projeto:
+    index.html        -> a estrutura do site (este arquivo)
+    css/estilo.css    -> as cores, tamanhos e layout
+    js/script.js      -> o que se mexe (calculadora, carrossel, etc.)
+    imagens/          -> as fotos do site
+
+  COMO ADICIONAR UMA NOVA SEÇÃO:
+    1. Copie uma seção parecida (ex.: a de "planos").
+    2. Cole entre duas seções, mude o id e o conteúdo.
+    3. Se quiser um link no menu, adicione em <nav class="menu">.
+    4. Se precisar de estilo novo, crie no estilo.css com
+       o mesmo nome da classe.
+
+  COMO TROCAR AS IMAGENS DO SITE:
+  Todas as imagens são tags <img> aqui no HTML. Existem 2 jeitos:
+
+    JEITO 1 (o mais fácil): substituir o arquivo.
+      Salve a sua foto com o MESMO NOME e na MESMA PASTA da foto
+      atual (ex.: imagens/professores/marina.jpg).
+      Pronto, não precisa mexer no código.
+
+    JEITO 2: mudar o endereço no código.
+      Procure a tag <img> e troque o que está dentro de src="...".
+      Exemplo:
+        <img src="imagens/professores/marina.jpg" alt="Foto de Marina Souza">
+      Com outro nome de arquivo:
+        <img src="imagens/professores/marina-nova.png" alt="Foto de Marina Souza">
+      Aproveite e atualize o alt (texto lido por leitores de tela).
+
+  ONDE FICA CADA IMAGEM:
+    Topo ............ imagens/foto-topo.jpg
+    Programas ....... imagens/programas/
+    Professores ..... imagens/professores/
+    Espaço .......... imagens/ambientes/
+    Alunos .......... imagens/alunos/
+
+  DICAS:
+    - Professores e alunos (círculos): foto quadrada, uns 400px,
+      com o rosto no centro.
+    - Programas e ambientes: foto horizontal, uns 800px de largura.
+    - Topo: foto horizontal grande (a atual tem 1300px de largura).
+    - Cuidado com letras maiúsculas e minúsculas no nome do arquivo.
+    - As imagens que vêm no projeto são de exemplo (degradê com letra).
+  ============================================================
+-->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0d0d">
+  <title>Gauleses Training</title>
+
+  <!--Icone-->
+  <link rel="icon" type="image/png" href="imagens/logo.png">
+
+  <!-- Fontes do Google: Bebas Neue (títulos) e Inter (textos) -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Nosso arquivo de estilos -->
+  <link rel="stylesheet" href="estilo.css">
+       <link rel="stylesheet" href="animacoes.css">
+</head>
+
+<body>
+
+  <!-- ======================================================
+       1. TOPO (logo, menu, título e foto de fundo)
+       A foto de fundo é colocada pelo CSS (classe .topo)
+       ====================================================== -->
+  <header class="topo fundo-escuro">
+
+    <!-- Foto de fundo do topo (para trocar, veja o guia no começo do arquivo) -->
+    <img class="topo-foto" src="imagens/fundo.jpg" alt="Mulher treinando com halteres">
+
+    <!-- Barra de cima: logo + menu -->
+    <div class="topo-barra">
+      <a class="logo" href="#">Gaule<b>s</b>es</a> 
+      <nav class="menu">
+        <a class="botoesnav" href="#programas">Programas</a>
+        <a class="botoesnav" href="#planos">Planos</a>
+        <a class="botoesnav" href="#contato">Contato</a>
+      </nav>
+    </div>
+
+    <!-- Título, texto e botão -->
+    <div class="topo-conteudo">
+      <h1>A sua melhor versão.</h1>
+      <!--<p>Nós ajudamos você a encontrar o melhor caminho para evoluir.</p> -->
+       <p>O processo é lento, mas desistir não acelera.</p>
+      
+      <a class="botao" href="#contato">Agendar Treino</a>
+    </div>
+
+  </header>
+
+
+  <!-- ======================================================
+       2. PROGRAMAS (cartões das modalidades)
+       Para adicionar um programa: copie um <a class="cartao ...">
+       ====================================================== -->
+  <section class="secao" id="programas">
+    <div class="conteudo">
+
+      <div class="cabecalho-secao">
+        <small>Escolha seu formato</small>
+        <h2>Mais de 5 programas</h2>
+      </div>
+
+      <div class="grade-programas">
+        <a class="cartao cartao-musculacao" href="#contato">
+          <img class="foto-fundo" src="imagens/programas/musculacao.jpg" alt="">
+          <h3>Musculação</h3>
+          <p>Ganhar massa muscular</p>
+        </a>
+        <a class="cartao cartao-hiit" href="#contato">
+          <img class="foto-fundo" src="imagens/programas/nutricao.jpg" alt="">
+          <h3>Nutrição</h3>
+          <p>Orientação alimentar</p>
+        </a>
+        <a class="cartao cartao-funcional" href="#contato">
+          <img class="foto-fundo" src="imagens/programas/funcional.jpeg" alt="">
+          <h3>Funcional</h3>
+          <p>Agilidade para o dia a dia</p>
+        </a>
+        <a class="cartao cartao-boxe" href="#contato">
+          <img class="foto-fundo" src="imagens/programas/cardio.jpeg" alt="">
+          <h3>Cardio</h3>
+          <p>Cuide da saúde do coração</p>
+        </a>
+        <a class="cartao cartao-mobilidade" href="#contato">
+          <img class="foto-fundo" src="imagens/programas/alongamento.jpg" alt="">
+          <h3>Alongamento</h3>
+          <p>Movimente-se com mais liberdade</p>
+        </a>
+      </div>
+
+      <a class="ver-todos" href="#contato">Ver todos os programas</a>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       3. CALCULADORA DE SAÚDE
+       O cálculo está no script.js (função calcular).
+       Os ids daqui são usados pelo JavaScript, não mude sem
+       mudar lá também.
+       ====================================================== -->
+  <section class="secao" id="calculadora">
+    <div class="conteudo">
+
+      <div class="cabecalho-secao">
+        <!-- <small>Descubra seu ponto de partida</small> -->
+        <small>Gauleses Training</small>
+        <h2>Calcule sua saúde</h2>
+        <p>Responda 4 perguntas rápidas e veja seus resultados na hora.</p>
+      </div>
+
+      <div class="calculadora">
+
+        <!-- Pergunta 1: gênero (dois botões de escolha) -->
+        <fieldset class="genero">
+          <legend>1. Qual é o seu gênero?</legend>
+          <label>
+            <input type="radio" name="genero" value="feminino" checked>
+            <span>Feminino</span>
+          </label>
+          <label>
+            <input type="radio" name="genero" value="masculino">
+            <span>Masculino</span>
+          </label>
+        </fieldset>
+
+        <!-- Perguntas 2, 3 e 4: idade, altura e peso -->
+        <div class="campos">
+          <div class="campo">
+            <label for="campo-idade">2. Qual é a sua idade?</label>
+            <div class="entrada">
+              <input id="campo-idade" type="text" inputmode="numeric" maxlength="3" autocomplete="off">
+              <span class="unidade" aria-hidden="true">anos</span>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="campo-altura">3. Qual é a sua altura?</label>
+            <div class="entrada">
+              <input id="campo-altura" type="text" inputmode="numeric" maxlength="3" autocomplete="off">
+              <span class="unidade" aria-hidden="true">cm</span>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="campo-peso">4. Qual é o seu peso?</label>
+            <div class="entrada">
+              <input id="campo-peso" type="text" inputmode="decimal" maxlength="5" autocomplete="off">
+              <span class="unidade" aria-hidden="true">kg</span>
+            </div>
+          </div>
+        </div>
+
+        
+
+        <!-- Mensagem de erro (aparece só se faltar algo) -->
+        <p class="erro" id="mensagem-erro" role="alert"></p>
+
+        <button class="botao" id="botao-calcular" type="button">Ver minha saúde</button>
+
+        <!-- Resultado (fica escondido até o usuário calcular) -->
+        <div class="resultado" id="resultado" hidden tabindex="-1">
+
+          <!-- Faixa colorida com a classificação -->
+          <div class="veredito" id="veredito">
+            <span class="veredito-rotulo">Seu resultado</span>
+            <strong class="veredito-classificacao" id="res-classificacao"></strong>
+            <span class="veredito-imc">IMC <b id="res-imc"></b></span>
+          </div>
+
+          <!-- Barra colorida com a setinha mostrando onde a pessoa está -->
+          <div class="escala-caixa" aria-hidden="true">
+            <div class="escala-marcador" id="escala-marcador">▼</div>
+            <div class="escala">
+              <i class="faixa-abaixo"></i>
+              <i class="faixa-normal"></i>
+              <i class="faixa-sobrepeso"></i>
+              <i class="faixa-obesidade"></i>
+            </div>
+            <div class="escala-nomes">
+              <span class="faixa-abaixo">Baixo</span>
+              <span class="faixa-normal">Normal</span>
+              <span class="faixa-sobrepeso">Sobrepeso</span>
+              <span class="faixa-obesidade">Obesidade</span>
+            </div>
+          </div>
+
+          <!-- Números extras -->
+          <div class="medidas">
+            <div class="medida">
+              <span>Metabolismo basal</span>
+              <strong id="res-metabolismo"></strong>
+              <small>calorias por dia em repouso</small>
+            </div>
+            <div class="medida">
+              <span>Água por dia</span>
+              <strong id="res-agua"></strong>
+              <small>recomendação geral</small>
+            </div>
+            <div class="medida medida-larga">
+              <span>Peso saudável para a sua altura</span>
+              <strong id="res-peso-ideal"></strong>
+            </div>
+          </div>
+
+          <p class="dica" id="res-dica"></p>
+
+          <!-- O link deste botão é montado pelo JavaScript com o resultado -->
+          <a class="botao" id="botao-whatsapp-resultado" href="#" target="_blank" rel="noopener">Enviar meu resultado no WhatsApp</a>
+
+          <p class="aviso-pequeno">Estimativa informativa. Não substitui avaliação médica ou nutricional.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       4. PLANOS
+       Cada plano é um link do WhatsApp. O JavaScript monta a
+       mensagem usando data-plano e data-preco.
+       Para adicionar um plano: copie um <a class="plano">
+       e mude o nome, o preço e a descrição.
+       ====================================================== -->
+  <section class="secao planos" id="planos">
+    <div class="conteudo">
+
+      <div class="cabecalho-secao">
+        <h2>Planos</h2>
+      </div>
+
+      <a class="plano" href="#" target="_blank" rel="noopener"
+         data-plano="Start" data-preco="90"
+         aria-label="Plano Essencial, R$ 90 por mês. Falar no WhatsApp">
+        <div>
+          <h3>Essencial</h3>
+          <span class="plano-descricao">Musculação em horário comercial</span>
+        </div>
+        <div class="plano-direita">
+          <span class="plano-preco">R$ 90<small>/mês</small></span>
+          <span class="plano-seta" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <!-- plano-destaque deixa o plano preto (o mais recomendado) -->
+      <a class="plano plano-destaque" href="#" target="_blank" rel="noopener"
+         data-plano="Drive" data-preco="139"
+         aria-label="Plano Performance, R$ 139 por mês. Falar no WhatsApp">
+        <div>
+          <h3>Performance</h3>
+          <span class="plano-descricao">Aulas coletivas, horário livre</span>
+        </div>
+        <div class="plano-direita">
+          <span class="plano-preco">R$ 139<small>/mês</small></span>
+          <span class="plano-seta" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <a class="plano" href="#" target="_blank" rel="noopener"
+         data-plano="Max" data-preco="299"
+         aria-label="Plano Premium, R$ 299 por mês. Falar no WhatsApp">
+        <div>
+          <h3>Premium</h3>
+          <span class="plano-descricao">personal 2x por semana, avaliação mensal e sauna</span>
+        </div>
+        <div class="plano-direita">
+          <span class="plano-preco">R$ 299<small>/mês</small></span>
+          <span class="plano-seta" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+     <!--
+      <a class="plano" href="#" target="_blank" rel="noopener"
+         data-plano="Premium" data-preco="299"
+         aria-label="Plano Premium, R$ 299 por mês. Falar no WhatsApp">
+        <div>
+          <h3>Premium</h3>
+          <span class="plano-descricao">Max + personal 2x por semana</span>
+        </div>
+        <div class="plano-direita">
+          <span class="plano-preco">R$ 299<small>/mês</small></span>
+          <span class="plano-seta" aria-hidden="true">→</span>
+        </div>
+      </a>
+     -->  
+
+      <p class="nota-planos">Toque em um plano para falar com a gente no WhatsApp. Garantia de 30 dias. Valores de exemplo.</p>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       5. PROFESSORES
+       Ao clicar em um professor, o JavaScript abre o balão
+       (div#balao-professor) com os dados do data-... do botão.
+       Para adicionar um professor: copie um <button class="professor">
+       ====================================================== -->
+  <section class="secao" id="professores">
+
+    <div class="cabecalho-secao conteudo">
+      <small>Aqui ninguém treina sozinho</small>
+      <h2>Os Profissionais da Academia</h2> 
+    </div>
+
+    <div class="equipe" id="equipe">
+
+      <div class="lista-professores">
+
+        <button class="professor" type="button" aria-expanded="false"
+                data-nome="Marina Souza"
+                data-especialidade="Funcional e HIIT"
+                data-experiencia="8 anos de experiência"
+                data-descricao="Treinos curtos e intensos para queimar calorias e ganhar fôlego."
+                data-horario="Aulas: seg a sex, manhã e noite">
+          <div class="foto-professor"><img src="imagens/professores/marina.png" alt="Foto de Marina Souza"></div>
+          <div class="dados-professor">
+            <strong>Marina</strong>
+            <span>Funcional</span>
+          </div>
+        </button>
+
+        <button class="professor" type="button" aria-expanded="false"
+                data-nome="Rafael Lima"
+                data-especialidade="Musculação"
+                data-experiencia="10 anos de experiência"
+                data-descricao="Foco em hipertrofia e técnica correta, do iniciante ao avançado."
+                data-horario="Salão: seg a sáb">
+          <div class="foto-professor"><img src="imagens/professores/rafael.jpeg" alt="Foto de Rafael Lima"></div>
+          <div class="dados-professor">
+            <strong>Rafael</strong>
+            <span>Musculação</span>
+          </div>
+        </button>
+
+        <button class="professor" type="button" aria-expanded="false"
+                data-nome="Ana Beatriz"
+                data-especialidade="Boxe e condicionamento"
+                data-experiencia="6 anos de experiência"
+                data-descricao="Pronta para orientar sua alimentação de acordo com seus objetivos, melhorar sua saúde e qualidade de vida."
+                data-horario="Aulas: ter, qui e sáb">
+          <div class="foto-professor"><img src="imagens/professores/ana.jpeg" alt="Foto de Ana Beatriz"></div>
+          <div class="dados-professor">
+            <strong>Ana</strong>
+            <span>Nutrição</span>
+          </div>
+        </button>
+
+        <button class="professor" type="button" aria-expanded="false"
+                data-nome="Diego Alves"
+                data-especialidade="Mobilidade e recuperação"
+                data-experiencia="7 anos de experiência"
+                data-descricao="Alongamento e mobilidade para treinar sem dor e evoluir mais."
+                data-horario="Aulas: seg, qua e sex">
+          <div class="foto-professor"><img src="imagens/professores/diego.jpeg" alt="Foto de Diego Alves"></div>
+          <div class="dados-professor">
+            <strong>Diego</strong>
+            <span>Mobilidade</span>
+          </div>
+        </button>
+
+      </div>
+
+      <!-- Balão com as informações (começa escondido) -->
+      <div class="balao-professor" id="balao-professor" hidden></div>
+
+    </div>
+
+    <a class="botao botao-pequeno" href="#contato">Escolher treinador</a>
+
+  </section>
+
+
+  <!-- ======================================================
+       6. ESPAÇO (mosaico de ambientes)
+       Cada ambiente tem um texto escondido (.info-ambiente).
+       O JavaScript mostra esse texto ao clicar.
+       ====================================================== -->
+  <section class="secao espaco fundo-escuro" id="espaco">
+    <div class="conteudo">
+
+      <h2>Um espaço que motiva sem palavras</h2>
+
+      <div class="mosaico" id="mosaico">
+
+        <div class="ambiente" role="button" tabindex="0" aria-expanded="false">
+          <img class="foto-fundo" src="imagens/ambientes/salao-musculacao.jpeg" alt="">
+          <span>Salão de musculação</span>
+          <p class="info-ambiente" hidden>
+            <strong>Salão de musculação</strong>
+            Equipamentos novos para todos os grupos musculares, com treinadores no salão em todos os horários.
+          </p>
+        </div>
+
+        <div class="ambiente" role="button" tabindex="0" aria-expanded="false">
+          <img class="foto-fundo" src="imagens/ambientes/alongamento.jpeg" alt="">
+          <span>Salão de Alongamento</span>
+          <p class="info-ambiente" hidden>
+            <strong>Alongamento</strong>
+            Um espaço dedicado à flexibilidade, mobilidade e relaxamento muscular.
+          </p>
+        </div>
+
+        <div class="ambiente" role="button" tabindex="0" aria-expanded="false">
+          <img class="foto-fundo" src="imagens/ambientes/mobilidade.jpeg" alt="">
+          <span>Mobilidade</span>
+          <p class="info-ambiente" hidden>
+            <strong>Mobilidade</strong>
+            Dedicado ao desenvolvimento da mobilidade, amplitude e flexibilidade corporal.
+          </p>
+        </div>
+
+        <div class="ambiente" role="button" tabindex="0" aria-expanded="false">
+          <img class="foto-fundo" src="imagens/ambientes/cardio.jpeg" alt="">
+          <span>Sala de Cardio</span>
+          <p class="info-ambiente" hidden>
+            <strong>Cardio</strong>
+            Treinos de 30 minutos em alta intensidade, com música e energia.
+          </p>
+        </div>
+
+        <div class="ambiente" role="button" tabindex="0" aria-expanded="false">
+          <img class="foto-fundo" src="imagens/ambientes/sauna.jpg" alt="">
+          <span>Sauna</span>
+          <p class="info-ambiente" hidden>
+            <strong>Sauna</strong>
+            Sauna e vestiários com ducha para relaxar depois do treino.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       7. AVALIAÇÕES DOS ALUNOS
+       Mostra uma avaliação por vez e troca sozinha a cada 6 s.
+       O texto de cada avaliação fica no data-texto do botão.
+       Para adicionar um aluno: copie um <button class="aluno">
+       ====================================================== -->
+  <section class="secao" id="avaliacoes">
+
+    <div class="cabecalho-secao conteudo">
+      <small>Mais de 800 alunos</small>
+      <h2>O que dizem sobre nós</h2>
+    </div>
+
+    <div class="conteudo">
+      <div class="carrossel" id="carrossel">
+
+        <!-- Cartão que mostra a avaliação do aluno escolhido -->
+        <article class="cartao-avaliacao" id="cartao-avaliacao" role="tabpanel">
+          <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
+          <p id="texto-avaliacao"></p>
+          <div class="autor-avaliacao" id="autor-avaliacao"></div>
+          <!-- Barrinha vermelha que mostra o tempo até a próxima troca -->
+          <div class="barra-tempo"><i id="barra-tempo-avaliacao"></i></div>
+        </article>
+
+        <!-- Fotos redondas dos alunos (clique para escolher) -->
+        <div class="abas-alunos" role="tablist" aria-label="Alunos">
+
+          <button class="aluno" type="button" role="tab" aria-selected="true"
+                  data-texto="Em dois meses perdi 6 kg e voltei a dormir bem. O treino se encaixa no meu horário.">
+            <span class="foto-aluno"><img src="imagens/lucas.jpg" alt="Foto de Lucas"></span>
+            <b class="aluno-nome">Lucas</b>
+            <small class="aluno-idade">29 anos</small>
+          </button>
+
+          <button class="aluno" type="button" role="tab" aria-selected="false"
+                  data-texto="Ambiente acolhedor, sem julgamento. Comecei do zero e não perco a aula de funcional.">
+            <span class="foto-aluno"><img src="imagens/camila.jpeg" alt="Foto de Camila"></span>
+            <b class="aluno-nome">Camila</b>
+            <small class="aluno-idade">21 anos</small>
+          </button>
+
+          <button class="aluno" type="button" role="tab" aria-selected="false"
+                  data-texto="Voltei a treinar depois de anos parada. A equipe cuidou de cada detalhe e hoje me sinto bem mais jovem.">
+            <span class="foto-aluno"><img src="imagens/beatriz.jpg" alt="Foto de Beatriz"></span>
+            <b class="aluno-nome">Beatriz</b>
+            <small class="aluno-idade">37 anos</small>
+          </button>
+
+          <button class="aluno" type="button" role="tab" aria-selected="false"
+                  data-texto="Os treinos de HIIT são puxados e divertidos. Em três meses ganhei muito mais disposição.">
+            <span class="foto-aluno"><img src="imagens/marcos.jpeg" alt="Foto de Marcos"></span>
+            <b class="aluno-nome">Marcos</b>
+            <small class="aluno-idade">25 anos</small>
+          </button>
+
+          <button class="aluno" type="button" role="tab" aria-selected="false"
+                  data-texto="Fiz a aula experimental e fechei o plano no mesmo dia. Tudo novo e limpo.">
+            <span class="foto-aluno"><img src="imagens/talia.jpeg" alt="Foto de Talia"></span>
+            <b class="aluno-nome">Talia</b>
+            <small class="aluno-idade">28 anos</small>
+          </button>
+        
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       8. RODAPÉ / CONTATO
+       ====================================================== -->
+  <footer class="rodape fundo-escuro" id="contato">
+    <div class="conteudo">
+
+      <span class="logo">Gaule<b>s</b>es Train<b>i</b>ng</span>  
+      <h2>Pronto para começar?</h2>
+      <a class="botao botao-branco" href="#contato">Agendar treino</a>
+
+      <!-- Endereço, horário e contato (ficam lado a lado se couber) -->
+      <div class="info-rodape">
+        <div>
+          <h4>Endereço</h4>
+          <p>Av. Exemplo, 123 – Tambaú<br>João Pessoa, PB</p>
+        </div>
+        <div>
+          <h4>Horário</h4>
+          <p>Seg a sex 5h às 23h<br>Sáb e dom 8h às 14h</p>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <p>(51)98627-3519<br>oi@gaulesestraining.com.br<br>gaulesestraining</p>
+        </div>
+      </div>
+
+      <p class="direitos">© 2026 Gauleses Training. Direitos reservados.</p>
+
+    </div>
+  </footer>
+
+
+  <!-- Nosso JavaScript (sempre por último, depois do HTML) -->
+  <script src="script.js"></script>
+       <script src="animacoes.js"></script>
+
+</body>
+</html>
